@@ -1,0 +1,30 @@
+{
+  "name": "harrypotterbot",
+  "version": "1.0.0",
+  "description": "a bot of harry potter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NiicoGonz/HarryPoterRole.git"
+  },
+  "keywords": [
+    "node",
+    "js",
+    "Harry",
+    "Potter",
+    "discord.js"
+  ],
+  "author": "Devniico",
+  "license": "MIT License",
+  "bugs": {
+    "url": "https://github.com/NiicoGonz/HarryPoterRole/issues"
+  },
+  "homepage": "https://github.com/NiicoGonz/HarryPoterRole#readme",
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3"
+  }
+}
