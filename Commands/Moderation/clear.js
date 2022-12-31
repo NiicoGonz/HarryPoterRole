@@ -4,7 +4,7 @@ module.exports = {
     data: new SlashCommandBuilder()
     .setName("clear")
     .setDescription("Elimina una cantidad de mensajes no mayor a 14 días.")
-    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addIntegerOption(option =>
         option.setName('amount')
         .setDescription('La cantidad debe ser menor a 100.')

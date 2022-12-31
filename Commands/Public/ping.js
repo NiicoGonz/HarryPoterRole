@@ -4,7 +4,7 @@ module.exports = {
     data: new SlashCommandBuilder()
     .setName("ping")
     .setDescription("Pong")
-    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator), // only allowed for admin users
+    .setDefaultMemberPermissions(), // only allowed for admin users
   async  execute(interaction, client) {
 
         const message = await interaction.deferReply({
