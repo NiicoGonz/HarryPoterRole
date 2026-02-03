@@ -33,21 +33,47 @@ module.exports = {
             let i = 0;
             const filtered = [];
 
-            (await messages).filter((msg) =>{
+            messages.filter((msg) => {
                 if(msg.author.id === target.id && amount > i) {
                     filtered.push(msg);
                     i++;
                 }
             });
 
-            await channel.bulkDelete(filtered).then(messages => {
-                res.setDescription(`Succesfully deleted ${messages.size} messages from ${target}.`);
-                interaction.reply({embeds: [res]}); // you can use ephemeral if you desire
+            if (filtered.length === 0) {
+                return interaction.reply({ 
+                    content: 'No se encontraron mensajes para eliminar.', 
+                    ephemeral: true 
+                });
+            }
+
+            await channel.bulkDelete(filtered, true).then(deletedMessages => {
+                res.setDescription(`Se eliminaron exitosamente ${deletedMessages.size} mensajes de ${target}.`);
+                interaction.reply({embeds: [res], ephemeral: true});
+            }).catch(error => {
+                console.error('Error al eliminar mensajes:', error);
+                interaction.reply({ 
+                    content: 'Hubo un error al eliminar los mensajes. Asegúrate de que los mensajes no tengan más de 14 días.', 
+                    ephemeral: true 
+                });
             });
         } else {
-            await channel.bulkDelete(amount, true).then(messages => {
-                res.setDescription(`Succesfully deleted ${messages.size} messages from the channel.`);
-                interaction.reply({embeds: [res]});
+            if (amount < 1 || amount > 100) {
+                return interaction.reply({ 
+                    content: 'La cantidad debe estar entre 1 y 100.', 
+                    ephemeral: true 
+                });
+            }
+
+            await channel.bulkDelete(amount, true).then(deletedMessages => {
+                res.setDescription(`Se eliminaron exitosamente ${deletedMessages.size} mensajes del canal.`);
+                interaction.reply({embeds: [res], ephemeral: true});
+            }).catch(error => {
+                console.error('Error al eliminar mensajes:', error);
+                interaction.reply({ 
+                    content: 'Hubo un error al eliminar los mensajes. Asegúrate de que los mensajes no tengan más de 14 días.', 
+                    ephemeral: true 
+                });
             });
         }
     }

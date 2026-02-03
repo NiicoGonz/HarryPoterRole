@@ -1,6 +1,7 @@
 function loadCommands(client) {
     const ascii = require('ascii-table');
     const fs = require('fs');
+    const logger = require('../Utils/logger');
     const table = new ascii().setHeading("Commands", "Status");
 
     let commandsArray = [];
@@ -21,9 +22,11 @@ function loadCommands(client) {
         }
     }
 
-    client.application.commands.set(commandsArray);
+    // Los comandos se registrarán cuando el bot esté listo (en el evento ready)
+    client.commandsArray = commandsArray;
 
+    logger.info(`${commandsArray.length} comandos cargados correctamente`);
     return console.log(table.toString(), "\n comandos cargados");
 }
 
-module.exports = {loadCommands};
+module.exports = { loadCommands };

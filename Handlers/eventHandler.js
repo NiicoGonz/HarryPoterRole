@@ -1,6 +1,7 @@
 function loadEvents(client) {
     const ascii = require('ascii-table');
     const fs = require('fs');
+    const logger = require('../Utils/logger');
     const table = new ascii().setHeading('Events', 'Status');
 
     const folders = fs.readdirSync('./Events');
@@ -11,10 +12,10 @@ function loadEvents(client) {
             const event = require(`../Events/${folder}/${file}`);
 
             if (event.rest) {
-                if(event.once)
+                if (event.once)
                     client.rest.once(event.name, (...args) =>
-                    event.execute(...args, client)
-                );
+                        event.execute(...args, client)
+                    );
                 else
                     client.rest.on(event.name, (...args) =>
                         event.execute(...args, client)
@@ -28,7 +29,8 @@ function loadEvents(client) {
             continue;
         }
     }
+    logger.event('EventHandlerLoaded', { eventCount: table.rows.length });
     return console.log(table.toString(), "\nEventos Cargados");
 }
 
-module.exports = {loadEvents};
+module.exports = { loadEvents };

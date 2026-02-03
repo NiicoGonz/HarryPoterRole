@@ -4,7 +4,12 @@
   "description": "a bot of harry potter",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "backup": "node scripts/manual-backup.js"
   },
   "repository": {
     "type": "git",
@@ -24,10 +29,18 @@
   },
   "homepage": "https://github.com/NiicoGonz/HarryPoterRole#readme",
   "dependencies": {
+    "@discordjs/voice": "^0.18.0",
     "ascii-table": "^0.0.9",
-    "discord.js": "^14.7.1",
-    "dotenv": "^16.0.3",
-    "fs": "^0.0.1-security",
-    "nodemon": "^2.0.20"
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5",
+    "mongoose": "^9.1.2",
+    "node-cron": "^4.2.1",
+    "openai": "^6.15.0",
+    "winston": "^3.19.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "jest": "^30.2.0",
+    "nodemon": "^3.1.0"
   }
 }
